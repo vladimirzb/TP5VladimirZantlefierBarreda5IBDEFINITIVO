@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -16,12 +17,53 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
+        android:id="@+id/idImageViewAtributo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/idImageViewAtributo"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/checkboxEstadoAnimo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"></ImageView>
+
+    <CheckBox
+        android:id="@+id/checkboxEstadoAnimo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Estado de animo"
+        android:textSize="30dp"
+        app:layout_constraintBottom_toTopOf="@+id/checkboxSonrisa"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"></CheckBox>
+
+    <CheckBox
+        android:id="@+id/checkboxSonrisa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sonrisa"
+        android:textSize="30dp"
+        app:layout_constraintBottom_toTopOf="@+id/checkboxBarba"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <CheckBox
+        android:id="@+id/checkboxBarba"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="96dp"
+        android:text="Barba"
+        android:textSize="30dp"
+        app:layout_constraintBottom_toTopOf="@+id/buttonSiguienAtributos"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonSiguienAtributos"
+        android:text="siguiente"
+        android:textSize="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
