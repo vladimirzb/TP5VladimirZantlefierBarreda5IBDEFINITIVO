@@ -30,7 +30,9 @@ ImageView imgViewvisualziadorImgIngresada;
 Button btnsiguienteFrgament;
 
     SharedPreferences preferences;
-int codigoPedirPermiso;
+int codigoSacarUnaFoto=0;
+int codigoElegirUnaFoto=1;
+int codigoPedirPermiso=2;
 
     public View onCreateView(LayoutInflater infladorLayout,  ViewGroup GrupoDeLaVista, Bundle Datos) {
         View vistaAdevolver;
@@ -56,7 +58,7 @@ int codigoPedirPermiso;
             ActivityCompat.requestPermissions(this.getActivity(),
                     new String[]
                             { Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE
-                            }, codigoPedirPermiso
+                            }, codigoSacarUnaFoto
             );
         } else{
             Log.d("Inicio","TIene permiso, habilito el boton de tomar fotos");
@@ -118,7 +120,7 @@ int codigoPedirPermiso;
                 Intent intenttomarFoto;
                 intenttomarFoto = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 Log.d("TomarFoto", "Llamo a la app");
-                startActivityForResult(intenttomarFoto, codigoPedirPermiso);
+                startActivityForResult(intenttomarFoto, codigoSacarUnaFoto);
                 break;
 
 
@@ -131,7 +133,7 @@ int codigoPedirPermiso;
                 intentObtenerFoto.setType("image/*");
 
                 Log.d("ElegirFoto", "Llamo a la activity");
-                startActivityForResult(Intent.createChooser(intentObtenerFoto, "Seleccione foto"), codigoPedirPermiso);
+                startActivityForResult(Intent.createChooser(intentObtenerFoto, "Seleccione foto"), codigoElegirUnaFoto);
                 break;
         }
     }
@@ -143,7 +145,7 @@ int codigoPedirPermiso;
             Log.d("FotoObtenida","Req:" + requestCode + "- Resul: " + resultCode);
             Log.d("FotoObtenida","Procesando...");
 
-            if (requestCode==codigoPedirPermiso && resultCode== this.getActivity().RESULT_OK) //NOTA PARA ACORDARME BUSCAR CONTEXTO DE LA ACTIVITY
+            if (requestCode== codigoSacarUnaFoto && resultCode== -1) //NOTA PARA ACORDARME BUSCAR CONTEXTO DE LA ACTIVITY
             {
                 Log.d("FotoTomada","Foto tomada OK");
                 Bitmap fotoElegida = (Bitmap) datosrecibidos.getExtras().get("data");
@@ -153,31 +155,31 @@ int codigoPedirPermiso;
 
 
             }
-            if (requestCode== codigoPedirPermiso && resultCode== this.getActivity().RESULT_OK && datosrecibidos!=null)
-            {
-                Uri ubicacion= datosrecibidos.getData();
-                Log.d("FotoObtenida", "Ubicacion: " + ubicacion);
-                Bitmap imagenFOTOTRY=null;
-                try
-                {
-                    imagenFOTOTRY = MediaStore.Images.Media.getBitmap(this.getActivity().getContentResolver(), ubicacion);
-                    Log.d("FotoObtenida","Foto obtenida OK");
+            if (requestCode ==  codigoElegirUnaFoto && resultCode== -1 ) {
+               Log.d("FotoObtenida", "Comenzamos con la logica de la foto elegida");
+                if (datosrecibidos!=null) {
 
-                }catch (Exception Error)
-                {
-                    Log.d("FotoObtenida", "Error en obtenion de foto" + Error.getMessage());
-                }
-                if (imagenFOTOTRY!=null )
-                {
-                    Log.d("FotoObtenida", "Muestro la foto en la pantalla");
-                    Bitmap fotoElegida= imagenFOTOTRY;
-                    imgViewvisualziadorImgIngresada.setImageBitmap(fotoElegida);
-                    Log.d("FotoObtenida","Mando a procesar la foto");
-                    ////FUNCIONPROCESARIMGE-VA ACA
 
+                    Uri ubicacion = datosrecibidos.getData();
+                    Log.d("FotoObtenida", "Ubicacion: " + ubicacion);
+                    Bitmap imagenFOTOTRY = null;
+                    try {
+                        imagenFOTOTRY = MediaStore.Images.Media.getBitmap(this.getActivity().getContentResolver(), ubicacion);
+                        Log.d("FotoObtenida", "Foto obtenida OK");
+
+                    } catch (Exception Error) {
+                        Log.d("FotoObtenida", "Error en obtenion de foto" + Error.getMessage());
+                    }
+                    if (imagenFOTOTRY != null) {
+                        Log.d("FotoObtenida", "Muestro la foto en la pantalla");
+                        Bitmap fotoElegida = imagenFOTOTRY;
+                        imgViewvisualziadorImgIngresada.setImageBitmap(fotoElegida);
+                        Log.d("FotoObtenida", "Mando a procesar la foto");
+                        ////FUNCIONPROCESARIMGE-VA ACA
+
+                    }
                 }
             }
-
 
         }
 

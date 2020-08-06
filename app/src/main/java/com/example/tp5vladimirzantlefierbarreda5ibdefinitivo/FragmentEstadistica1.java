@@ -77,8 +77,8 @@ public class FragmentEstadistica1 extends Fragment
 
 
         Log.d("Azure","Credenciales API");
-        String apiEndpoint = "https://brazilsouth.api.cognitive.microsoft.com/";
-        String subscriptionKey = "994f54a94c9a48b9a81ce887943b9c08";
+        String apiEndpoint = "https://brazilsouth.api.cognitive.microsoft.com/face/v1.0";
+        String subscriptionKey = "072b3cadee714e05833025819eecc37b";
 
         try {
             Log.d("Azure","Instancio el servicio");
@@ -112,19 +112,20 @@ public class FragmentEstadistica1 extends Fragment
             protected Face[] doInBackground(InputStream... imagenAprocesar) {
                 publishProgress("Detetactando caras");
                 Face[] resultado = null;
+                Log.d("ProcesarImagen", " Defino que atributos quiero procesar");
+                FaceServiceClient.FaceAttributeType[] atributos;
+                atributos = new FaceServiceClient.FaceAttributeType[]
+                        {
+                                FaceServiceClient.FaceAttributeType.Age,
+                                FaceServiceClient.FaceAttributeType.Glasses,
+                                FaceServiceClient.FaceAttributeType.Smile,
+                                FaceServiceClient.FaceAttributeType.FacialHair,
+                                FaceServiceClient.FaceAttributeType.Gender
+                        };
                 try {
-                    Log.d("ProcesarImagen", " Defino que atributos quiero procesar");
-                    FaceServiceClient.FaceAttributeType[] atributos;
-                    atributos = new FaceServiceClient.FaceAttributeType[]
-                            {
-                                    FaceServiceClient.FaceAttributeType.Age,
-                                    FaceServiceClient.FaceAttributeType.Glasses,
-                                    FaceServiceClient.FaceAttributeType.Smile,
-                                    FaceServiceClient.FaceAttributeType.FacialHair,
-                                    FaceServiceClient.FaceAttributeType.Gender
-                            };
-                    Log.d("ProcesarImagen", "Llamo al procesamiento de la imagen");
-                    resultado= servicioPreocesamientoImagenes.detect(imagenAprocesar[0],true,false,atributos);
+                    Log.d("ProcesarImagen", "Llamo al procesamiento de la imagen: "+imagenAprocesar[0]);
+                    resultado = servicioPreocesamientoImagenes.detect(imagenAprocesar[0],true,false,atributos);
+                    Log.d("ProcesarImagen", "Volvi al procesamiento de la imagen");
                 }
                 catch (Exception error)
                 {
