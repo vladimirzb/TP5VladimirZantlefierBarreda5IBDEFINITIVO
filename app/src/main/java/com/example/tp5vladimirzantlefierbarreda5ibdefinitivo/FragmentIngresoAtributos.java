@@ -40,6 +40,7 @@ Boolean checkedEstadoAnime=true;
         visualizadorImageView.setImageBitmap(mainActivity.fotoElegida);
 
         btnSiguienteAtributo = vistaADevolver.findViewById(R.id.buttonSiguienAtributos);
+        btnSiguienteAtributo.setOnClickListener(this);
 
         chkbxBarba = vistaADevolver.findViewById(R.id.checkboxBarba);
         chkbxBarba.setOnClickListener(this);

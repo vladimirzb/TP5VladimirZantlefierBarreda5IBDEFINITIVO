@@ -14,6 +14,10 @@ public class MainActivity extends Activity {
 
     Bitmap fotoElegida;
 
+
+    Boolean atributoBarba;
+    Boolean atributoSonrisa;
+    Boolean atributoEstadoAnimo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +40,21 @@ public class MainActivity extends Activity {
     public void procesarFotoIngresada(Bitmap fotoelegi)
     {
         fotoElegida=fotoelegi;
+
+        Fragment frgIngresoAtributos;
+        frgIngresoAtributos = new FragmentIngresoAtributos();
+
+        transacFragments=adminFragment.beginTransaction();
+        transacFragments.replace(R.id.AlojadorDeFragment, frgIngresoAtributos);
+        transacFragments.commit();
+    }
+
+
+    public void procesarAtributos(Boolean atributoBarbaaaa, Boolean atributoSonrisaaaa, Boolean atributoEstadoAnimoooo)
+    {
+        atributoBarba=atributoBarbaaaa;
+        atributoEstadoAnimo=atributoEstadoAnimoooo;
+        atributoSonrisa=atributoSonrisaaaa;
 
         Fragment frgIngresoAtributos;
         frgIngresoAtributos = new FragmentIngresoAtributos();
