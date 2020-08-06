@@ -56,11 +56,11 @@ public class MainActivity extends Activity {
         atributoEstadoAnimo=atributoEstadoAnimoooo;
         atributoSonrisa=atributoSonrisaaaa;
 
-        Fragment frgIngresoAtributos;
-        frgIngresoAtributos = new FragmentIngresoAtributos();
+        Fragment FragmentEstadistica1;
+        FragmentEstadistica1 = new FragmentEstadistica1();
 
         transacFragments=adminFragment.beginTransaction();
-        transacFragments.replace(R.id.AlojadorDeFragment, frgIngresoAtributos);
+        transacFragments.replace(R.id.AlojadorDeFragment, FragmentEstadistica1);
         transacFragments.commit();
     }
 }

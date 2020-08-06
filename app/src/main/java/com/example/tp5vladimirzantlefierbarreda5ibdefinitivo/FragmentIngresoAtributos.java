@@ -24,7 +24,7 @@ Boolean checkedBarba=false;
 CheckBox chkbxSonrisa;
 Boolean checkedSonrisa=false;
 CheckBox chkbxEstadoDeAnimo;
-Boolean checkedEstadoAnime=true;
+Boolean checkedEstadoAnime=false;
 
     public View onCreateView(LayoutInflater infladorDeLayouts2, ViewGroup grupoDeLaVista2, Bundle Datos2) {
         View vistaADevolver;
@@ -65,7 +65,11 @@ Boolean checkedEstadoAnime=true;
         switch (v.getId()) {
 
             case R.id.buttonSiguienAtributos:
+                MainActivity mainact;
+                mainact = (MainActivity) getActivity();
 
+
+                mainact.procesarAtributos(checkedBarba, checkedSonrisa ,checkedEstadoAnime);
                 break;
 
             case R.id.checkboxBarba:
