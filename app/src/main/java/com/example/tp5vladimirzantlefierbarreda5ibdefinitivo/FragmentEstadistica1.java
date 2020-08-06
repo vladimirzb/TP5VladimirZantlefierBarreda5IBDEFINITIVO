@@ -23,6 +23,7 @@ import com.microsoft.projectoxford.face.contract.*;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
+import java.util.ArrayList;
 
 public class FragmentEstadistica1 extends Fragment
 {
@@ -35,6 +36,8 @@ public class FragmentEstadistica1 extends Fragment
 
     Bitmap fotoElegidaEstadis;
     ProgressDialog  dialogoDeProgreso;
+
+    Boolean sonrisaBool;
 
     // Azure
     FaceServiceRestClient servicioPreocesamientoImagenes;
@@ -58,6 +61,8 @@ public class FragmentEstadistica1 extends Fragment
         txtviewEstadiEstadoDeAnimo.setVisibility(View.INVISIBLE);
         txtviewEstadiSonrisa.setVisibility(View.INVISIBLE);
 
+
+        sonrisaBool = mainActivity.atributoSonrisa;
         if (mainActivity.atributoSonrisa==true)
         {
             txtviewEstadiSonrisa.setVisibility(View.VISIBLE);
@@ -110,20 +115,35 @@ public class FragmentEstadistica1 extends Fragment
 
         class procesarImagen extends AsyncTask<InputStream, String, Face[]>
         {
+
             @Override
             protected Face[] doInBackground(InputStream... imagenAprocesar) {
                 publishProgress("Detetactando caras");
                 Face[] resultado = null;
                 Log.d("ProcesarImagen", " Defino que atributos quiero procesar");
-                FaceServiceClient.FaceAttributeType[] atributos;
-                atributos = new FaceServiceClient.FaceAttributeType[]
-                        {
-                                FaceServiceClient.FaceAttributeType.Age,
-                                FaceServiceClient.FaceAttributeType.Glasses,
-                                FaceServiceClient.FaceAttributeType.Smile,
-                                FaceServiceClient.FaceAttributeType.FacialHair,
-                                FaceServiceClient.FaceAttributeType.Gender
-                        };
+//                FaceServiceClient.FaceAttributeType[] atributos;
+//                atributos = new FaceServiceClient.FaceAttributeType[]
+//                        {
+//                                FaceServiceClient.FaceAttributeType.Age,
+//                                FaceServiceClient.FaceAttributeType.Glasses,
+//                                FaceServiceClient.FaceAttributeType.Smile,
+//                                FaceServiceClient.FaceAttributeType.FacialHair,
+//                                FaceServiceClient.FaceAttributeType.Gender
+//                        };
+
+                ArrayList<FaceServiceClient.FaceAttributeType> atributosList = new ArrayList<FaceServiceClient.FaceAttributeType>(); // Create an ArrayList object
+                atributosList.add(FaceServiceClient.FaceAttributeType.Age);
+                atributosList.add(FaceServiceClient.FaceAttributeType.Glasses);
+                atributosList.add(FaceServiceClient.FaceAttributeType.Smile);
+                atributosList.add(FaceServiceClient.FaceAttributeType.FacialHair);
+                atributosList.add(FaceServiceClient.FaceAttributeType.Gender);
+
+
+
+
+
+                FaceServiceClient.FaceAttributeType[] atributos = atributosList.toArray(new FaceServiceClient.FaceAttributeType[0]); //Pasamos la lista a un array
+
                 try {
                     Log.d("ProcesarImagen", "Llamo al procesamiento de la imagen: "+imagenAprocesar[0]);
                     resultado = servicioPreocesamientoImagenes.detect(imagenAprocesar[0],true,false,atributos);
@@ -247,5 +267,7 @@ public class FragmentEstadistica1 extends Fragment
 
 
     }
+
+
 
 }
