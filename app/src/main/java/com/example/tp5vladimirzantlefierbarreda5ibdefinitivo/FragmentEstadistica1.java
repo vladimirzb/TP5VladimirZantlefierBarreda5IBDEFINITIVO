@@ -30,6 +30,7 @@ public class FragmentEstadistica1 extends Fragment
     TextView txtviewAEstadiBarba;
     TextView txtviewEstadiSonrisa;
     TextView txtviewEstadiEstadoDeAnimo;
+    TextView txtviewResultadoGeneral;
     ImageView imgvwResultadoEstadis;
 
     Bitmap fotoElegidaEstadis;
@@ -50,6 +51,7 @@ public class FragmentEstadistica1 extends Fragment
         txtviewAEstadiBarba = vistaADevolver.findViewById(R.id.textviewbarbaAtributoEstadistica);
         txtviewEstadiEstadoDeAnimo = vistaADevolver.findViewById(R.id.textviewEstadoAnimeEstadis);
         txtviewEstadiSonrisa = vistaADevolver.findViewById(R.id.textviewSonrisaEstadis1);
+        txtviewResultadoGeneral = vistaADevolver.findViewById(R.id.textViewEstadisResultadoGeneral);
         imgvwResultadoEstadis = vistaADevolver.findViewById(R.id.imageViewResultadoEstadis);
 
         txtviewAEstadiBarba.setVisibility(View.INVISIBLE);
@@ -236,7 +238,7 @@ public class FragmentEstadistica1 extends Fragment
             }
 
             mensaje+= " - H: " +cantidadHombre +  " - M:" + cantidadMujeres;
-            ///text.settext
+            txtviewResultadoGeneral.setText(mensaje);
 
         }
 
