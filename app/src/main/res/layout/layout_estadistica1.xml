@@ -52,9 +52,17 @@
         android:id="@+id/imageViewResultadoEstadis"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
+
+        app:layout_constraintBottom_toTopOf="@+id/textViewEstadisResultadoGeneral"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textviewbarbaAtributoEstadistica"></ImageView>
 
+    <TextView
+        android:id="@+id/textViewEstadisResultadoGeneral"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Aca se mostraran los resultados"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"></TextView>
 </androidx.constraintlayout.widget.ConstraintLayout>

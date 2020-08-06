@@ -30,6 +30,7 @@ public class FragmentEstadistica1 extends Fragment
     TextView txtviewAEstadiBarba;
     TextView txtviewEstadiSonrisa;
     TextView txtviewEstadiEstadoDeAnimo;
+    TextView txtviewResultadoGeneral;
     ImageView imgvwResultadoEstadis;
 
     Bitmap fotoElegidaEstadis;
@@ -50,6 +51,7 @@ public class FragmentEstadistica1 extends Fragment
         txtviewAEstadiBarba = vistaADevolver.findViewById(R.id.textviewbarbaAtributoEstadistica);
         txtviewEstadiEstadoDeAnimo = vistaADevolver.findViewById(R.id.textviewEstadoAnimeEstadis);
         txtviewEstadiSonrisa = vistaADevolver.findViewById(R.id.textviewSonrisaEstadis1);
+        txtviewResultadoGeneral = vistaADevolver.findViewById(R.id.textViewEstadisResultadoGeneral);
         imgvwResultadoEstadis = vistaADevolver.findViewById(R.id.imageViewResultadoEstadis);
 
         txtviewAEstadiBarba.setVisibility(View.INVISIBLE);
@@ -164,7 +166,7 @@ public class FragmentEstadistica1 extends Fragment
                         recuadrarCaras(imagenAprocesar,resultado);
 
                         Log.d("ProcesarImagen","Mando a procsar los resultados de cada cara");
-//                        procesareusltadosDecaras(resultado);
+                        procesareusltadosDecaras(resultado);
                     }else {
                         Log.d("ProcesarImagen","No se detecto ninguna cara");
                         //Mostrarlo en textview?
@@ -204,6 +206,43 @@ public class FragmentEstadistica1 extends Fragment
         }
         Log.d("RecuadrarCaras", "Pongo la imagen resultante en el ImageView");
         imgvwResultadoEstadis.setImageBitmap(imagenADibujar);
+
+
+
+    }
+
+    void procesareusltadosDecaras (Face[] carasAprocesar){
+    int cantidadHombre =0;
+        int cantidadMujeres=0;
+
+    Log.d("ProcesarImagen", "Armo el mensaje con informacion");
+    String mensaje;
+    mensaje="";
+
+        for (int punteroCara=0 ; punteroCara<carasAprocesar.length; punteroCara++)
+        {
+            mensaje+= "Edad: " + carasAprocesar[punteroCara].faceAttributes.age;
+            mensaje+= " - Sonrisa: " + carasAprocesar[punteroCara].faceAttributes.smile;
+            mensaje+=" - Barba: " +  carasAprocesar[punteroCara].faceAttributes.facialHair.beard;
+            mensaje+= " - Genero: " + carasAprocesar[punteroCara].faceAttributes.gender;
+            mensaje+=" - Anteojos: " + carasAprocesar[punteroCara].faceAttributes.glasses;
+
+            if (carasAprocesar[punteroCara].faceAttributes.gender.equals("male"))
+            {
+                cantidadHombre++;
+            }else {
+                cantidadMujeres++;
+            }
+            if (punteroCara<carasAprocesar.length-1){
+                mensaje+="\n";
+            }
+
+            mensaje+= " - H: " +cantidadHombre +  " - M:" + cantidadMujeres;
+            txtviewResultadoGeneral.setText(mensaje);
+
+        }
+
+
 
 
 
