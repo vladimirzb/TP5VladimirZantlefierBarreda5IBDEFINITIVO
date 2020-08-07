@@ -38,6 +38,8 @@ public class FragmentEstadistica1 extends Fragment
     ProgressDialog  dialogoDeProgreso;
 
     Boolean sonrisaBool;
+    Boolean estadoAnimoBool;
+    Boolean barbaBool;
 
     // Azure
     FaceServiceRestClient servicioPreocesamientoImagenes;
@@ -63,6 +65,8 @@ public class FragmentEstadistica1 extends Fragment
 
 
         sonrisaBool = mainActivity.atributoSonrisa;
+        barbaBool = mainActivity.atributoBarba;
+        estadoAnimoBool=mainActivity.atributoEstadoAnimo;
         if (mainActivity.atributoSonrisa==true)
         {
             txtviewEstadiSonrisa.setVisibility(View.VISIBLE);
@@ -134,8 +138,13 @@ public class FragmentEstadistica1 extends Fragment
                 ArrayList<FaceServiceClient.FaceAttributeType> atributosList = new ArrayList<FaceServiceClient.FaceAttributeType>(); // Create an ArrayList object
                 atributosList.add(FaceServiceClient.FaceAttributeType.Age);
                 atributosList.add(FaceServiceClient.FaceAttributeType.Glasses);
-                atributosList.add(FaceServiceClient.FaceAttributeType.Smile);
-                atributosList.add(FaceServiceClient.FaceAttributeType.FacialHair);
+                if (sonrisaBool==true) {
+                    atributosList.add(FaceServiceClient.FaceAttributeType.Smile);
+                }
+
+                if (barbaBool=true) {
+                    atributosList.add(FaceServiceClient.FaceAttributeType.FacialHair);
+                }
                 atributosList.add(FaceServiceClient.FaceAttributeType.Gender);
 
 
@@ -241,11 +250,20 @@ public class FragmentEstadistica1 extends Fragment
 
         for (int punteroCara=0 ; punteroCara<carasAprocesar.length; punteroCara++)
         {
-            mensaje+= "Edad: " + carasAprocesar[punteroCara].faceAttributes.age;
-            mensaje+= " - Sonrisa: " + carasAprocesar[punteroCara].faceAttributes.smile;
-            mensaje+=" - Barba: " +  carasAprocesar[punteroCara].faceAttributes.facialHair.beard;
-            mensaje+= " - Genero: " + carasAprocesar[punteroCara].faceAttributes.gender;
-            mensaje+=" - Anteojos: " + carasAprocesar[punteroCara].faceAttributes.glasses;
+//            mensaje+= "Edad: " + carasAprocesar[punteroCara].faceAttributes.age;
+            if (sonrisaBool==true) //Si eligio que analicemos la sonrisa
+            {
+                mensaje += " - Sonrisa: " + carasAprocesar[punteroCara].faceAttributes.smile;
+            }
+//
+            if (barbaBool==true)//Si eligio que analicemos la barba
+            {
+                mensaje += " - Barba: " + carasAprocesar[punteroCara].faceAttributes.facialHair.beard;
+            }
+
+//            mensaje+= " - Genero: " + carasAprocesar[punteroCara].faceAttributes.gender;
+//            mensaje+=" - Anteojos: " + carasAprocesar[punteroCara].faceAttributes.glasses;
+
 
             if (carasAprocesar[punteroCara].faceAttributes.gender.equals("male"))
             {
