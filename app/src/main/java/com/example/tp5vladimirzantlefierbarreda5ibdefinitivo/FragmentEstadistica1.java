@@ -247,6 +247,7 @@ public class FragmentEstadistica1 extends Fragment
     int cantidadMujeres=0;
 
     int cantidadPersonasSonriendo=0;
+    int cantidadPersonasBarba=0;
 
     Log.d("ProcesarImagen", "Armo el mensaje con informacion");
     String mensaje;
@@ -267,6 +268,10 @@ public class FragmentEstadistica1 extends Fragment
             if (barbaBool==true)//Si eligio que analicemos la barba
             {
                 mensaje += " - Barba: " + carasAprocesar[punteroCara].faceAttributes.facialHair.beard;
+                if (carasAprocesar[punteroCara].faceAttributes.facialHair.beard>0.5)
+                {
+                    cantidadPersonasBarba++;
+                }
             }
 
 //            mensaje+= " - Genero: " + carasAprocesar[punteroCara].faceAttributes.gender;
@@ -288,11 +293,25 @@ public class FragmentEstadistica1 extends Fragment
 
         }
 
+        int carasTotales= carasAprocesar.length;
 
         //Logica estadistica sonrisa
-        int  porcentajeGenteSonriendo = cantidadPersonasSonriendo / carasAprocesar.length;
-        porcentajeGenteSonriendo *= 100;
-        txtviewResultadoSonrisa.setText("De todas las personas en la foto solamemnte un " + porcentajeGenteSonriendo + "%" + " estan sonriendo promedio o mayor");
+        if(sonrisaBool) {
+            float porcentajeGenteSonriendo = (float) cantidadPersonasSonriendo / carasTotales;
+            porcentajeGenteSonriendo *= 100;
+
+
+            txtviewResultadoSonrisa.setText("De todas las personas en la foto solamemnte un " + porcentajeGenteSonriendo + "%" + " estan sonriendo promedio o mayor");
+        }
+
+
+        if(barbaBool) {
+
+            float porcentajeGenteBarba = (float) cantidadPersonasBarba / carasTotales;
+            porcentajeGenteBarba *= 100;
+            txtviewResultadoSonrisa.setText("De todas las personas en la foto solamemnte un " + porcentajeGenteBarba + "%" + " estan sonriendo promedio o mayor");
+        }
+
 
 
         
