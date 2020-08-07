@@ -34,13 +34,14 @@ public class FragmentEstadistica1 extends Fragment
     TextView txtviewResultadoGeneral;
     TextView txtviewResultadoSonrisa;
     TextView txtviewResultadoBarba;
+    TextView txtviewResultadoEnojo;
     ImageView imgvwResultadoEstadis;
 
     Bitmap fotoElegidaEstadis;
     ProgressDialog  dialogoDeProgreso;
 
     Boolean sonrisaBool;
-    Boolean estadoAnimoBool;
+    Boolean enojoBool;
     Boolean barbaBool;
 
     // Azure
@@ -61,6 +62,7 @@ public class FragmentEstadistica1 extends Fragment
         txtviewResultadoGeneral = vistaADevolver.findViewById(R.id.textViewEstadisResultadoGeneral);
         txtviewResultadoSonrisa = vistaADevolver.findViewById(R.id.textViewEstadisResultadoSonrisa);
         txtviewResultadoBarba = vistaADevolver.findViewById(R.id.textViewEstadisResultadoBarba);
+        txtviewResultadoEnojo =  vistaADevolver.findViewById(R.id.textViewEstadisResultadoEnojo);
         imgvwResultadoEstadis = vistaADevolver.findViewById(R.id.imageViewResultadoEstadis);
 
         txtviewAEstadiBarba.setVisibility(View.INVISIBLE);
@@ -70,14 +72,14 @@ public class FragmentEstadistica1 extends Fragment
 
         sonrisaBool = mainActivity.atributoSonrisa;
         barbaBool = mainActivity.atributoBarba;
-        estadoAnimoBool=mainActivity.atributoEstadoAnimo;
+        enojoBool=mainActivity.atributoEnojo;
         if (mainActivity.atributoSonrisa==true)
         {
             txtviewEstadiSonrisa.setVisibility(View.VISIBLE);
 
         }
 
-        if (mainActivity.atributoEstadoAnimo==true)
+        if (mainActivity.atributoEnojo==true)
         {
             txtviewEstadiEstadoDeAnimo.setVisibility(View.VISIBLE);
 
@@ -146,8 +148,12 @@ public class FragmentEstadistica1 extends Fragment
                     atributosList.add(FaceServiceClient.FaceAttributeType.Smile);
                 }
 
-                if (barbaBool=true) {
+                if (barbaBool==true) {
                     atributosList.add(FaceServiceClient.FaceAttributeType.FacialHair);
+                }
+
+                if (enojoBool==true) {
+                    atributosList.add(FaceServiceClient.FaceAttributeType.Emotion);
                 }
                 atributosList.add(FaceServiceClient.FaceAttributeType.Gender);
 
@@ -250,6 +256,7 @@ public class FragmentEstadistica1 extends Fragment
 
     int cantidadPersonasSonriendo=0;
     int cantidadPersonasBarba=0;
+    int cantidadPersonasEnojadas=0;
 
     Log.d("ProcesarImagen", "Armo el mensaje con informacion");
     String mensaje;
@@ -276,6 +283,15 @@ public class FragmentEstadistica1 extends Fragment
                 }
             }
 
+            if (enojoBool==true)//Si eligio que analicemos el enojo
+            {
+                mensaje += " - Enojo: " + carasAprocesar[punteroCara].faceAttributes.emotion.anger;
+                if (carasAprocesar[punteroCara].faceAttributes.emotion.anger>0.5)
+                {
+                    cantidadPersonasEnojadas++;
+                }
+            }
+
 //            mensaje+= " - Genero: " + carasAprocesar[punteroCara].faceAttributes.gender;
 //            mensaje+=" - Anteojos: " + carasAprocesar[punteroCara].faceAttributes.glasses;
 
@@ -298,7 +314,7 @@ public class FragmentEstadistica1 extends Fragment
         int carasTotales= carasAprocesar.length;
 
         //Logica estadistica sonrisa
-        if(sonrisaBool) {
+        if(sonrisaBool==true) {
             float porcentajeGenteSonriendo = (float) cantidadPersonasSonriendo / carasTotales;
             porcentajeGenteSonriendo *= 100;
 
@@ -307,11 +323,18 @@ public class FragmentEstadistica1 extends Fragment
         }
 
 
-        if(barbaBool) {
+        if(barbaBool==true) {
 
             float porcentajeGenteBarba = (float) cantidadPersonasBarba / carasTotales;
             porcentajeGenteBarba *= 100;
-            txtviewResultadoSonrisa.setText("De todas las personas en la foto solamemnte un " + porcentajeGenteBarba + "%" + " tienen una barba promedio o mayor");
+            txtviewResultadoBarba.setText("De todas las personas en la foto solamemnte un " + porcentajeGenteBarba + "%" + " tienen una barba promedio o mayor");
+        }
+
+        if(enojoBool==true) {
+
+            float porcentajeGenteEnojada = (float) cantidadPersonasEnojadas / carasTotales;
+            porcentajeGenteEnojada *= 100;
+            txtviewResultadoEnojo.setText("De todas las personas en la foto solamemnte un " + porcentajeGenteEnojada + "%" + " estan enojadas");
         }
 
 

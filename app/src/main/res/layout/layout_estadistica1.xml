@@ -41,10 +41,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="10dp"
         android:id="@+id/textviewEstadoAnimeEstadis"
-        android:text="Estado de animo"
-        android:textSize="20dp"
+        android:text="Enojo"
+        android:textSize="30dp"
         app:layout_constraintStart_toEndOf="@+id/textviewbarbaAtributoEstadistica"
         app:layout_constraintTop_toBottomOf="@+id/tituloatributos" />
 
@@ -53,10 +52,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        app:layout_constraintBottom_toTopOf="@+id/textViewEstadisResultadoBarba"
+        app:layout_constraintBottom_toTopOf="@+id/textViewEstadisResultadoEnojo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textviewbarbaAtributoEstadistica"></ImageView>
+
+    <TextView
+        android:id="@+id/textViewEstadisResultadoEnojo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Aca se mostraran las estadisticas con el enojo"
+        android:textSize="17dp"
+        app:layout_constraintBottom_toTopOf="@+id/textViewEstadisResultadoBarba"
+        app:layout_constraintStart_toStartOf="parent"></TextView>
 
 
     <TextView

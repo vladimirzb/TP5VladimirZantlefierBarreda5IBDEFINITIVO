@@ -17,7 +17,7 @@ public class MainActivity extends Activity {
 
     Boolean atributoBarba;
     Boolean atributoSonrisa;
-    Boolean atributoEstadoAnimo;
+    Boolean atributoEnojo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,7 +53,7 @@ public class MainActivity extends Activity {
     public void procesarAtributos(Boolean atributoBarbaaaa, Boolean atributoSonrisaaaa, Boolean atributoEstadoAnimoooo)
     {
         atributoBarba=atributoBarbaaaa;
-        atributoEstadoAnimo=atributoEstadoAnimoooo;
+        atributoEnojo=atributoEstadoAnimoooo;
         atributoSonrisa=atributoSonrisaaaa;
 
         Fragment FragmentEstadistica1;
