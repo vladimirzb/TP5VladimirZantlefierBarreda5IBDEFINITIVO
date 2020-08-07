@@ -32,6 +32,7 @@ public class FragmentEstadistica1 extends Fragment
     TextView txtviewEstadiSonrisa;
     TextView txtviewEstadiEstadoDeAnimo;
     TextView txtviewResultadoGeneral;
+    TextView txtviewResultadoSonrisa;
     ImageView imgvwResultadoEstadis;
 
     Bitmap fotoElegidaEstadis;
@@ -57,6 +58,7 @@ public class FragmentEstadistica1 extends Fragment
         txtviewEstadiEstadoDeAnimo = vistaADevolver.findViewById(R.id.textviewEstadoAnimeEstadis);
         txtviewEstadiSonrisa = vistaADevolver.findViewById(R.id.textviewSonrisaEstadis1);
         txtviewResultadoGeneral = vistaADevolver.findViewById(R.id.textViewEstadisResultadoGeneral);
+        txtviewResultadoSonrisa = vistaADevolver.findViewById(R.id.textViewEstadisResultadoSonrisa);
         imgvwResultadoEstadis = vistaADevolver.findViewById(R.id.imageViewResultadoEstadis);
 
         txtviewAEstadiBarba.setVisibility(View.INVISIBLE);
@@ -242,7 +244,9 @@ public class FragmentEstadistica1 extends Fragment
 
     void procesareusltadosDecaras (Face[] carasAprocesar){
     int cantidadHombre =0;
-        int cantidadMujeres=0;
+    int cantidadMujeres=0;
+
+    int cantidadPersonasSonriendo=0;
 
     Log.d("ProcesarImagen", "Armo el mensaje con informacion");
     String mensaje;
@@ -254,6 +258,10 @@ public class FragmentEstadistica1 extends Fragment
             if (sonrisaBool==true) //Si eligio que analicemos la sonrisa
             {
                 mensaje += " - Sonrisa: " + carasAprocesar[punteroCara].faceAttributes.smile;
+                if (carasAprocesar[punteroCara].faceAttributes.smile > 0.5)
+                {
+                    cantidadPersonasSonriendo++;
+                }
             }
 //
             if (barbaBool==true)//Si eligio que analicemos la barba
@@ -281,9 +289,13 @@ public class FragmentEstadistica1 extends Fragment
         }
 
 
+        //Logica estadistica sonrisa
+        int  porcentajeGenteSonriendo = cantidadPersonasSonriendo / carasAprocesar.length;
+        porcentajeGenteSonriendo *= 100;
+        txtviewResultadoSonrisa.setText("De todas las personas en la foto solamemnte un " + porcentajeGenteSonriendo + "%" + " estan sonriendo promedio o mayor");
 
 
-
+        
     }
 
 

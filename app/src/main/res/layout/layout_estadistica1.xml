@@ -58,11 +58,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textviewbarbaAtributoEstadistica"></ImageView>
 
+
     <TextView
-        android:id="@+id/textViewEstadisResultadoGeneral"
+        android:id="@+id/textViewEstadisResultadoSonrisa"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Aca se mostraran los resultados"
+        android:text="Aca se mostraran las estasdisticas con la sonrisa"
+        android:textSize="17dp"
+        app:layout_constraintBottom_toTopOf="@+id/textViewEstadisResultadoGeneral"
+        app:layout_constraintStart_toStartOf="parent"></TextView>
+
+    <TextView
+        android:id="@+id/textViewEstadisResultadoGeneral"
+        android:textSize="17dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Aca se mostraran los resultados de atributos obligatorios"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"></TextView>
 </androidx.constraintlayout.widget.ConstraintLayout>
