@@ -53,12 +53,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        app:layout_constraintBottom_toTopOf="@+id/textViewEstadisResultadoGeneral"
+        app:layout_constraintBottom_toTopOf="@+id/textViewEstadisResultadoBarba"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textviewbarbaAtributoEstadistica"></ImageView>
 
 
+    <TextView
+        android:id="@+id/textViewEstadisResultadoBarba"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Aca se mostraran las estasdisticas con la barba"
+        android:textSize="17dp"
+        app:layout_constraintBottom_toTopOf="@+id/textViewEstadisResultadoSonrisa"
+        app:layout_constraintStart_toStartOf="parent"></TextView>
     <TextView
         android:id="@+id/textViewEstadisResultadoSonrisa"
         android:layout_width="wrap_content"

@@ -33,6 +33,7 @@ public class FragmentEstadistica1 extends Fragment
     TextView txtviewEstadiEstadoDeAnimo;
     TextView txtviewResultadoGeneral;
     TextView txtviewResultadoSonrisa;
+    TextView txtviewResultadoBarba;
     ImageView imgvwResultadoEstadis;
 
     Bitmap fotoElegidaEstadis;
@@ -59,6 +60,7 @@ public class FragmentEstadistica1 extends Fragment
         txtviewEstadiSonrisa = vistaADevolver.findViewById(R.id.textviewSonrisaEstadis1);
         txtviewResultadoGeneral = vistaADevolver.findViewById(R.id.textViewEstadisResultadoGeneral);
         txtviewResultadoSonrisa = vistaADevolver.findViewById(R.id.textViewEstadisResultadoSonrisa);
+        txtviewResultadoBarba = vistaADevolver.findViewById(R.id.textViewEstadisResultadoBarba);
         imgvwResultadoEstadis = vistaADevolver.findViewById(R.id.imageViewResultadoEstadis);
 
         txtviewAEstadiBarba.setVisibility(View.INVISIBLE);
@@ -309,7 +311,7 @@ public class FragmentEstadistica1 extends Fragment
 
             float porcentajeGenteBarba = (float) cantidadPersonasBarba / carasTotales;
             porcentajeGenteBarba *= 100;
-            txtviewResultadoSonrisa.setText("De todas las personas en la foto solamemnte un " + porcentajeGenteBarba + "%" + " estan sonriendo promedio o mayor");
+            txtviewResultadoSonrisa.setText("De todas las personas en la foto solamemnte un " + porcentajeGenteBarba + "%" + " tienen una barba promedio o mayor");
         }
 
 
