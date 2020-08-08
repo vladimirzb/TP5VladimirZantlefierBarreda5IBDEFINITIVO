@@ -55,14 +55,16 @@ int codigoPedirPermiso=2;
         {
             Log.d("Inicio", "Me fijo si la App tiene permiso para usar la camara");
             btnsacarFoto.setEnabled(false);
+            btnelegirFoto.setEnabled(false);
             ActivityCompat.requestPermissions(this.getActivity(),
                     new String[]
                             { Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE
-                            }, codigoSacarUnaFoto
+                            }, codigoPedirPermiso
             );
         } else{
             Log.d("Inicio","TIene permiso, habilito el boton de tomar fotos");
             btnsacarFoto.setEnabled(true);
+            btnelegirFoto.setEnabled(true);
         }
 
         return vistaAdevolver;
@@ -92,6 +94,7 @@ int codigoPedirPermiso=2;
             if (obtuvoTodosLosPermisos){
                 Log.d("PermisosPediso","Obtuvo todos los permisos, habilito el boton");
                 btnsacarFoto.setEnabled(true);
+                btnelegirFoto.setEnabled(true);
             }else {
                 Log.d("PermisosPedidos","NO obtuvo todos permisos, no habilito una goma");
             }
