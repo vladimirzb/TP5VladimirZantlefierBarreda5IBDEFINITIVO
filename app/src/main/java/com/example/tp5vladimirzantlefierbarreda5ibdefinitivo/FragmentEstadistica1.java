@@ -35,6 +35,7 @@ public class FragmentEstadistica1 extends Fragment
     TextView txtviewResultadoSonrisa;
     TextView txtviewResultadoBarba;
     TextView txtviewResultadoEnojo;
+    TextView txtviewTituloAtributos;
     ImageView imgvwResultadoEstadis;
 
     Bitmap fotoElegidaEstadis;
@@ -63,6 +64,7 @@ public class FragmentEstadistica1 extends Fragment
         txtviewResultadoSonrisa = vistaADevolver.findViewById(R.id.textViewEstadisResultadoSonrisa);
         txtviewResultadoBarba = vistaADevolver.findViewById(R.id.textViewEstadisResultadoBarba);
         txtviewResultadoEnojo =  vistaADevolver.findViewById(R.id.textViewEstadisResultadoEnojo);
+        txtviewTituloAtributos = vistaADevolver.findViewById(R.id.tituloatributos);
         imgvwResultadoEstadis = vistaADevolver.findViewById(R.id.imageViewResultadoEstadis);
 
         txtviewAEstadiBarba.setVisibility(View.INVISIBLE);
@@ -257,6 +259,7 @@ public class FragmentEstadistica1 extends Fragment
     int cantidadPersonasSonriendo=0;
     int cantidadPersonasBarba=0;
     int cantidadPersonasEnojadas=0;
+    int cantidadPersonasAnteojos=0;
 
     Log.d("ProcesarImagen", "Armo el mensaje con informacion");
     String mensaje;
@@ -295,6 +298,13 @@ public class FragmentEstadistica1 extends Fragment
 //            mensaje+= " - Genero: " + carasAprocesar[punteroCara].faceAttributes.gender;
 //            mensaje+=" - Anteojos: " + carasAprocesar[punteroCara].faceAttributes.glasses;
 
+            //Logica anteojos para leer
+            mensaje += " - Anteojos: " + carasAprocesar[punteroCara].faceAttributes.glasses;
+            if (carasAprocesar[punteroCara].faceAttributes.glasses.toString() == "ReadingGlasses" )
+            {
+                cantidadPersonasAnteojos++;
+            }
+
 
             if (carasAprocesar[punteroCara].faceAttributes.gender.equals("male"))
             {
@@ -305,13 +315,38 @@ public class FragmentEstadistica1 extends Fragment
             if (punteroCara<carasAprocesar.length-1){
                 mensaje+="\n";
             }
-
+//Mensaje sirve para debuggear
             mensaje+= " - H: " +cantidadHombre +  " - M:" + cantidadMujeres;
-            txtviewResultadoGeneral.setText(mensaje);
+            //BORRAR ESTO DE ABAJO
+//            txtviewResultadoEnojo.setText(mensaje);
+//            txtviewResultadoGeneral.setText(mensaje);
+
+
 
         }
 
         int carasTotales= carasAprocesar.length;
+
+
+        //Logica atributos predeterminados
+        float porcentajeGenteMujer = (float) cantidadMujeres / carasTotales;
+        porcentajeGenteMujer *= 100;
+
+        float porcentajeGenteHombre = (float) cantidadHombre / carasTotales;
+        porcentajeGenteHombre *= 100;
+
+        float porcentajeGenteAnteojos = (float) cantidadPersonasAnteojos / carasTotales;
+        porcentajeGenteAnteojos *= 100;
+
+        txtviewResultadoGeneral.setText("De todas las personas un " + porcentajeGenteHombre + "% son hombres" + " y un " +
+                porcentajeGenteMujer + "% son mujeres. De los cuales un " + porcentajeGenteAnteojos + "% de todas las personas en la foto estan usando anteojos para leer" );
+
+
+
+
+
+
+
 
         //Logica estadistica sonrisa
         if(sonrisaBool==true) {
@@ -319,7 +354,7 @@ public class FragmentEstadistica1 extends Fragment
             porcentajeGenteSonriendo *= 100;
 
 
-            txtviewResultadoSonrisa.setText("De todas las personas en la foto solamemnte un " + porcentajeGenteSonriendo + "%" + " estan sonriendo promedio o mayor");
+            txtviewResultadoSonrisa.setText("De todas las personas en la foto solamemnte un " + porcentajeGenteSonriendo + "%" + " estan sonriendo con una sonrisa promedio o mayor");
         }
 
 
