@@ -29,7 +29,7 @@
         android:id="@+id/checkboxEstadoAnimo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Estado de animo"
+        android:text="Enojo"
         android:textSize="30dp"
         app:layout_constraintBottom_toTopOf="@+id/checkboxSonrisa"
         app:layout_constraintEnd_toEndOf="parent"
@@ -49,14 +49,21 @@
         android:id="@+id/checkboxBarba"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="96dp"
         android:text="Barba"
         android:textSize="30dp"
-        app:layout_constraintBottom_toTopOf="@+id/buttonSiguienAtributos"
+        app:layout_constraintBottom_toTopOf="@+id/textView2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="(Valores obligatorios predeterminados: Edad, genero, anteojos)"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/buttonSiguienAtributos"
+        app:layout_constraintStart_toStartOf="parent"></TextView>
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
