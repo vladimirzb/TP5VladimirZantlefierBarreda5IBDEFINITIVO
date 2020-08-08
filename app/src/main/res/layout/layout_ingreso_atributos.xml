@@ -18,8 +18,10 @@
 
     <ImageView
         android:id="@+id/idImageViewAtributo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="325dp"
+        android:layout_height="351dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="3dp"
         app:layout_constraintBottom_toTopOf="@+id/checkboxEstadoAnimo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
